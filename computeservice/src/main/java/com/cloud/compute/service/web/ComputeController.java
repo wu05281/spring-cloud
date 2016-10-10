@@ -7,10 +7,13 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 
 /**
  * Created by wubo on 2016/10/9.
  */
+@RestController
 public class ComputeController {
     private final Logger logger = Logger.getLogger(getClass());
 
