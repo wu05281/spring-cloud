@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CloudConfigCtl {
 
-    @Value("{name}")
+    @Value("${name}")
     private String name;
 
     @RequestMapping(value = "/check", method = RequestMethod.GET)
