@@ -7,6 +7,7 @@ spring:
           git:
               uri: https://github.com/wu05281/springcloud
               searchPaths: file-config
-              username: wu05281
+              username: username
+              password: password
 server:
   port: 7001
