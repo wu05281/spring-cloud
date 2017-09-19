@@ -25,6 +25,7 @@
 	</properties>
 
 	<dependencies>
+		<!-- config server所依赖的配置 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-config-server</artifactId>

@@ -1,0 +1,3 @@
+1, 在pom.xml中引入spring-cloud-starter-config依赖
+2, 创建bootstrap.properties配置，来指定config server
+3, 通过@Value("${from}")绑定配置服务中配置的from属性(如 CloudConfigCtl 所示)

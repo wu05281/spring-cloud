@@ -1,0 +1,3 @@
+1, pom.xml中引入spring-cloud-config-server依赖
+2, Spring Boot的程序主类添加@EnableConfigServer注解，开启Config Server
+3, application.properties(或yml)中配置服务信息以及git信息

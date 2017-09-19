@@ -5,7 +5,9 @@ spring:
     config:
       server:
           git:
+              #配置git仓库位置
               uri: https://github.com/wu05281/springcloud
+              #配置仓库路径下的相对搜索位置，可以配置多个
               searchPaths: file-config
               #真正的github用户名密码
               username: ***
