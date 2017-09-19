@@ -10,7 +10,15 @@ spring:
               #配置仓库路径下的相对搜索位置，可以配置多个
               searchPaths: file-config
               #真正的github用户名密码
-              username: ***
-              password: ****
+              username: username
+              password: password
+  activemq:
+    user: admin
+    password: admin
+    broker-url: tcp://localhost:61616
+    in-memory: true
+    pool:
+      enabled: false
+
 server:
   port: 7001
