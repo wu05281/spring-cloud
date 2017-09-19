@@ -1,3 +1,10 @@
+配置spring cloud config server
 1, pom.xml中引入spring-cloud-config-server依赖
 2, Spring Boot的程序主类添加@EnableConfigServer注解，开启Config Server
 3, application.properties(或yml)中配置服务信息以及git信息
+
+集成activeMQ
+1，pom.xml中引入spring-boot-starter-activemq依赖
+2，application.properties(或yml)中配置activeMQ的broker-url等信息
+3，启动入口类中配置 bean ：ActiveMQQueue
+4，producer，consumer见具体代码
