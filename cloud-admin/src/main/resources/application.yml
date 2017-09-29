@@ -1,0 +1,7 @@
+server:
+  port: 8083
+
+info:
+  name: springBoot-admin
+  description: @project.description@
+  version: @project.version@
