@@ -1,6 +1,0 @@
-<application>
-  <component name="MavenServices">
-    <service-url>https://repository.jboss.org/nexus/service/local/</service-url>
-    <service-url>http://maven.aliyun.com/nexus/content/repositories/central</service-url>
-  </component>
-</application>
