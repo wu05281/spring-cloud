@@ -5,7 +5,7 @@ server端：
 2，配置applicatin.properties(或yml)中eureka属性
 3，启动入口增加@EnableEurekaServer注解
 
-需要被发现并注册的服务端：
+需要被发现并注册的客户端：
 1，引入eureka依赖：spring-cloud-starter-eureka
 2，配置applicatin.properties(或yml)中eureka属性
 3，启动入口增加@EnableDiscoveryClient注解
