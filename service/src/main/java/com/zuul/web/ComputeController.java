@@ -10,18 +10,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.TimeUnit;
+
 @RestController
 public class ComputeController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private DiscoveryClient client;
+    private DiscoveryClient discoveryClient;
 
     @RequestMapping(value = "/add" ,method = RequestMethod.GET)
     public Integer add(@RequestParam Integer a, @RequestParam Integer b) {
-        ServiceInstance instance = client.getLocalServiceInstance();
+        try {
+            TimeUnit.SECONDS.sleep(8);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String service = "Services:" + discoveryClient.getServices();
         Integer r = a + b;
-        logger.info("/add, host:" + instance.getHost() + ", service_id:" + instance.getServiceId() + ", result:" + r);
+        logger.info("/add, " + service + ", result:" + r);
+        return r;
+    }
+
+    @RequestMapping(value = "/mul" ,method = RequestMethod.GET)
+    public Integer mul(@RequestParam Integer a, @RequestParam Integer b) {
+        String service = "Services:" + discoveryClient.getServices();
+        Integer r = a * b;
+        logger.info("/mul, " + service + ", result:" + r);
         return r;
     }
 }
