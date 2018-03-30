@@ -11,12 +11,17 @@ import javax.annotation.Resource;
 @RestController
 public class ConsumerController {
 
-    @Resource(name = "computeClientF")
+    @Autowired
     ComputeClient computeClient;
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public Integer add() {
         return computeClient.add(10, 20);
+    }
+
+    @RequestMapping(value = "/mul", method = RequestMethod.GET)
+    public Integer mul() {
+        return computeClient.mul(10, 20);
     }
 
 }
