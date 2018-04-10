@@ -9,6 +9,7 @@ import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import javax.annotation.Resource;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,13 +18,10 @@ public class CustomRouteLocator extends SimpleRouteLocator implements Refreshabl
 
     public final static Logger logger = LoggerFactory.getLogger(CustomRouteLocator.class);
 
+    @Resource
     private JdbcTemplate jdbcTemplate;
 
     private ZuulProperties properties;
-
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
 
     public CustomRouteLocator(String servletPath, ZuulProperties properties) {
         super(servletPath, properties);
