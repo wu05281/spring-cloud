@@ -1,6 +1,11 @@
 spring:
   application:
     name: api-gateway
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
 server:
   port: 5555
 
@@ -19,6 +24,7 @@ zuul:
 #    api-b:
 #      path: /api-b/**
 #      serviceId: service-b
+  sensitive-headers:  # blacklist，如果不过滤，则须显式设为空。
 
 eureka:
   client:
