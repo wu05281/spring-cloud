@@ -1,6 +1,6 @@
 package com.zuul.dynamicroutes;
 
-public class ZuulRouteVO {
+public class ZuulRouteDO {
 
     /**
      * The ID of the route (the same as its map key by default).
