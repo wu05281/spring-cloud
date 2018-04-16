@@ -6,6 +6,15 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
+  redis:
+    cluster:
+      nodes:
+        - 172.17.247.73:7000
+        - 172.17.247.73:7001
+        - 172.17.247.73:7002
+        - 172.17.247.73:7003
+        - 172.17.247.73:7004
+        - 172.17.247.73:7005
 server:
   port: 5555
 
@@ -24,7 +33,30 @@ zuul:
 #    api-b:
 #      path: /api-b/**
 #      serviceId: service-b
-  sensitive-headers:  # blacklist，如果不过滤，则须显式设为空。
+#  sensitive-headers:  # blacklist，如果不过滤，则须显式设为空。
+  ratelimit:
+    enabled: true
+    repository: redis
+    behind-proxy: true
+#    default-policy: #可选 - 针对所有的路由配置的策略，除非特别配置了policies
+#      limit: 10 #可选 - 每个刷新时间窗口对应的请求数量限制
+#      quota: 1000 #可选-  每个刷新时间窗口对应的请求时间限制（秒）
+#      refresh-interval: 60 # 刷新时间窗口的时间，默认值 (秒)
+#      type: #可选 限流方式
+#        - user
+#        - origin
+#        - url
+    policies:
+      api-a:
+        limit: 3
+        quota: 20
+        refresh-interval: 10
+        type:
+          - user
+          - origin
+          - url
+  strip-prefix: true
+
 
 eureka:
   client:
