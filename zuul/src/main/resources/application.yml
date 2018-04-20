@@ -10,11 +10,6 @@ spring:
     cluster:
       nodes:
         - 172.17.247.73:7000
-        - 172.17.247.73:7001
-        - 172.17.247.73:7002
-        - 172.17.247.73:7003
-        - 172.17.247.73:7004
-        - 172.17.247.73:7005
 server:
   port: 5555
 
@@ -39,19 +34,12 @@ zuul:
     repository: redis
     behind-proxy: true
 #    default-policy: #可选 - 针对所有的路由配置的策略，除非特别配置了policies
-#      limit: 10 #可选 - 每个刷新时间窗口对应的请求数量限制
-#      quota: 1000 #可选-  每个刷新时间窗口对应的请求时间限制（秒）
-#      refresh-interval: 60 # 刷新时间窗口的时间，默认值 (秒)
-#      type: #可选 限流方式
-#        - user
-#        - origin
-#        - url
     policies:
       api-a:
-        limit: 3
-        quota: 20
-        refresh-interval: 10
-        type:
+        limit: 3   #可选 - 每个刷新时间窗口对应的请求数量限制
+        quota: 20  #可选-  每个刷新时间窗口对应的请求时间限制（秒）
+        refresh-interval: 10  # 刷新时间窗口的时间，默认值 (秒)
+        type:  #可选 限流方式
           - user
           - origin
           - url
