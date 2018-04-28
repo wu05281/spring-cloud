@@ -13,8 +13,6 @@ import java.util.Set;
 
 public class CustomUserDetails extends User implements UserDetails {
 
-    private static final long serialVersionUID = 1702923242319850756L;
-
     private final boolean enabled;
     private final boolean accountNonExpired;
     private final boolean credentialsNonExpired;
@@ -35,10 +33,6 @@ public class CustomUserDetails extends User implements UserDetails {
         } else {
             throw new IllegalArgumentException("Cannot pass null or empty values to constructor");
         }
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
     }
 
     @Override
