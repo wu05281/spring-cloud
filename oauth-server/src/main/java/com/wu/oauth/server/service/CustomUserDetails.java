@@ -11,20 +11,22 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CustomUserDetails extends User implements UserDetails {
+public class CustomUserDetails implements UserDetails {
 
     private final boolean enabled;
     private final boolean accountNonExpired;
     private final boolean credentialsNonExpired;
     private final boolean accountNonLocked;
     private final Set<GrantedAuthority> authorities;
+    private String username;
+    private String password;
 
     public CustomUserDetails(User user, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         if (user != null
                 && !StringUtils.isEmpty(user.getUsername())
                 && !StringUtils.isEmpty(user.getPassword())) {
-            setUsername(user.getUsername());
-            setPassword(user.getPassword());
+            this.username = user.getUsername();
+            this.password = user.getPassword();
             this.enabled = enabled;
             this.accountNonExpired = accountNonExpired;
             this.credentialsNonExpired = credentialsNonExpired;
@@ -58,5 +60,15 @@ public class CustomUserDetails extends User implements UserDetails {
     @Override
     public Set<GrantedAuthority> getAuthorities() {
         return authorities;
+    }
+
+    @Override
+    public String getPassword(){
+        return password;
+    }
+
+    @Override
+    public String getUsername(){
+        return username;
     }
 }
