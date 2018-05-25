@@ -11,33 +11,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-//@Controller
-//@SessionAttributes({ "authorizationRequest" })
+@Controller
+@SessionAttributes({ "authorizationRequest" })
 public class OAuthController {
 
-//    @RequestMapping({ "/oauth/my_approval_page" })
-//    public String getAccessConfirmation(Map<String, Object> model, HttpServletRequest request) throws Exception {
-//        @SuppressWarnings("unchecked")
-//        Map<String, String> scopes = (Map<String, String>) (model.containsKey("scopes") ? model.get("scopes") : request.getAttribute("scopes"));
-//        List<String> scopeList = new ArrayList<String>();
-//        for (String scope : scopes.keySet()) {
-//            scopeList.add(scope);
-//        }
-//        model.put("scopeList", scopeList);
-//        return "oauth_approval";
-//    }
-//
-//    @RequestMapping({ "/oauth/my_error_page" })
-//    public String handleError(Map<String, Object> model, HttpServletRequest request) {
-//        Object error = request.getAttribute("error");
-//        String errorSummary;
-//        if (error instanceof OAuth2Exception) {
-//            OAuth2Exception oauthError = (OAuth2Exception) error;
-//            errorSummary = HtmlUtils.htmlEscape(oauthError.getSummary());
-//        } else {
-//            errorSummary = "Unknown error";
-//        }
-//        model.put("errorSummary", errorSummary);
-//        return "oauth_error";
-//    }
+    @RequestMapping({ "/oauth/my_approval_page" })
+    public String getAccessConfirmation(Map<String, Object> model, HttpServletRequest request) throws Exception {
+        @SuppressWarnings("unchecked")
+        Map<String, String> scopes = (Map<String, String>) (model.containsKey("scopes") ? model.get("scopes") : request.getAttribute("scopes"));
+        List<String> scopeList = new ArrayList<String>();
+        for (String scope : scopes.keySet()) {
+            scopeList.add(scope);
+        }
+        model.put("scopeList", scopeList);
+        return "oauth_approval";
+    }
+
+    @RequestMapping({ "/oauth/my_error_page" })
+    public String handleError(Map<String, Object> model, HttpServletRequest request) {
+        Object error = request.getAttribute("error");
+        String errorSummary;
+        if (error instanceof OAuth2Exception) {
+            OAuth2Exception oauthError = (OAuth2Exception) error;
+            errorSummary = HtmlUtils.htmlEscape(oauthError.getSummary());
+        } else {
+            errorSummary = "Unknown error";
+        }
+        model.put("errorSummary", errorSummary);
+        return "oauth_error";
+    }
 }
