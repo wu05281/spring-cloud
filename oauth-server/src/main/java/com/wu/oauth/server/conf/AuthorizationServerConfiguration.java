@@ -11,10 +11,12 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.concurrent.TimeUnit;
@@ -31,6 +33,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Resource
     private UserDetailsService userDetailsService;
+
+    @Resource
+    private AuthorizationEndpoint authorizationEndpoint;
 
     @Bean
     public TokenStore tokenStore() {
@@ -84,5 +89,11 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         oauthServer.checkTokenAccess("permitAll()");
         oauthServer.allowFormAuthenticationForClients();
     }
+
+//    @PostConstruct
+//    public void init() {
+//        authorizationEndpoint.setUserApprovalPage("forward:/oauth/my_approval_page");
+//        authorizationEndpoint.setErrorPage("forward:/oauth/my_error_page");
+//    }
 
 }

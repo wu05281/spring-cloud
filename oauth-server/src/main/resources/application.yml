@@ -4,3 +4,12 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
+  thymeleaf:
+    prefix: classpath:/templates/
+# Elasticsearch
+elasticsearch:
+  cluster:
+    name: elasticsearch
+  ip: 172.17.246.53
+  port: 9200
+  pool: 5
