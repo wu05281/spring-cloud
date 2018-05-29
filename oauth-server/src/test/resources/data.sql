@@ -104,4 +104,4 @@ CREATE TABLE IF NOT EXISTS `alan-oauth`.`oauth_refresh_token` (
   `authentication` BLOB NULL DEFAULT NULL)
   ENGINE = InnoDB
   DEFAULT CHARACTER SET = utf8;
-INSERT INTO oauth_client_details VALUES ('client', NULL, 'secret', 'app', 'authorization_code', 'http://www.baidu.com', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO oauth_client_details VALUES ('client', 'oauth-resource', 'secret', 'app', 'authorization_code', 'http://www.baidu.com', NULL, NULL, NULL, NULL, NULL);
