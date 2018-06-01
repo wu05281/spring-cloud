@@ -1,13 +1,11 @@
 package com.wu.oauth.resource.conf;
 
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
 
 import javax.annotation.Resource;
 
@@ -19,18 +17,21 @@ public class ResServerConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        resources.resourceId(props.getResourceId());
+        resources.resourceId(props.getResourceId()).stateless(true);
     }
 
     @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(HttpMethod.GET, "/api/user").authenticated();
-    }
-
-    @Bean
-    public RemoteTokenServices remoteTokenServices() {
-        RemoteTokenServices remoteTokenServices = new RemoteTokenServices();
-        remoteTokenServices.setCheckTokenEndpointUrl(props.getTokenInfoUri());
-        return remoteTokenServices;
+    public void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                // Since we want the protected resources to be accessible in the UI as well we need
+                // session creation to be allowed (it's disabled by default in 2.0.6)
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .and()
+                .requestMatchers().anyRequest()
+                .and()
+                .anonymous()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/api/user").authenticated();
     }
 }
