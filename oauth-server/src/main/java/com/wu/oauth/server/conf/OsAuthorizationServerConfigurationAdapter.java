@@ -3,7 +3,6 @@ package com.wu.oauth.server.conf;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -24,10 +23,7 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
-
-    @Resource
-    private AuthenticationManager authenticationManager;
+public class OsAuthorizationServerConfigurationAdapter extends AuthorizationServerConfigurerAdapter {
 
     @Resource
     private DataSource dataSource;
@@ -35,6 +31,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Resource
     private UserDetailsService userDetailsService;
 
+    //用于自定义授权页面 authorizationEndpoint.setUserApprovalPage
     @Resource
     private AuthorizationEndpoint authorizationEndpoint;
 
@@ -48,6 +45,15 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         return new JdbcClientDetailsService(dataSource);
     }
 
+    //对应于配置AuthorizationServer安全认证的相关信息，创建ClientCredentialsTokenEndpointFilter核心过滤器
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
+        oauthServer.checkTokenAccess("permitAll()");
+        //允许表单认证
+        oauthServer.allowFormAuthenticationForClients();
+    }
+
+    //配置OAuth2的客户端相关信息
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         //基于jdbc
@@ -70,9 +76,10 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     }
 
 
+    //配置身份认证器，配置认证方式，TokenStore，TokenGranter，OAuth2RequestFactory
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore()).authenticationManager(authenticationManager);
+        endpoints.tokenStore(tokenStore());
         endpoints.userDetailsService(userDetailsService);
         // 配置TokenServices参数
         DefaultTokenServices tokenServices = new DefaultTokenServices();
@@ -86,13 +93,6 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         // 允许get方式访问token
         endpoints.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
         //endpoints.pathMapping("/oauth/confirm_access", "/oauth/my_approval_page");
-    }
-
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        oauthServer.checkTokenAccess("permitAll()");
-        //允许表单认证
-        oauthServer.allowFormAuthenticationForClients();
     }
 
     @PostConstruct
