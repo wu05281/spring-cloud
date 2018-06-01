@@ -13,3 +13,5 @@ elasticsearch:
   ip: 172.17.246.53
   port: 9200
   pool: 5
+logging:
+  level: debug
