@@ -48,7 +48,6 @@ public class OsAuthorizationServerConfigurationAdapter extends AuthorizationServ
     //对应于配置AuthorizationServer安全认证的相关信息，创建ClientCredentialsTokenEndpointFilter核心过滤器
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
-        oauthServer.checkTokenAccess("permitAll()");
         //允许表单认证
         oauthServer.allowFormAuthenticationForClients();
     }
