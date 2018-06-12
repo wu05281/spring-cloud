@@ -1,6 +1,6 @@
 package com.wu.oauth.server.service;
 
-import com.wu.oauth.server.User;
+import com.wu.oauth.server.dto.User;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

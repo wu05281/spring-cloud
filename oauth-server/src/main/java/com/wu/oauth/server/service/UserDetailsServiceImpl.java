@@ -1,6 +1,6 @@
 package com.wu.oauth.server.service;
 
-import com.wu.oauth.server.User;
+import com.wu.oauth.server.dto.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

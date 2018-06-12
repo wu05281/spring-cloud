@@ -1,4 +1,4 @@
-package com.wu.oauth.server;
+package com.wu.oauth.server.dto;
 
 import org.springframework.stereotype.Component;
 

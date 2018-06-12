@@ -14,4 +14,5 @@ elasticsearch:
   port: 9200
   pool: 5
 logging:
-  level: debug
+  level:
+    root: debug
